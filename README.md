@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # RideRental - WinForms Application
 ## Vehicle Rental System | C# .NET Framework 4.7.2
 
@@ -198,3 +199,6 @@ All theme constants are in `AppTheme.cs`.
 - `VehicleDetailForm` and `InquiryForm` are dialog `Form` instances (use `ShowDialog`)
 - SQL injection is prevented via **parameterized queries** throughout all services
 - All DB calls wrapped in `try/catch` with user-friendly error messages
+=======
+# RentX
+>>>>>>> 1c9455b97abe7dca6bbbaf10b443b0946820fe1b

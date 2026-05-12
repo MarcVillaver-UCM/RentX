@@ -11,125 +11,22 @@ namespace RentXpress.Forms
     // BookingListPanel separates renter booking records from the Messages chat UI.
     // The app currently stores booking requests in the inquiries table, so this panel
     // reads those same records but displays only reservation-related information.
-    public class BookingListPanel : UserControl
+    public partial class BookingListPanel : UserControl
     {
         private readonly MainForm _mainForm;
         private readonly InquiryService _inquiryService = new InquiryService();
         private readonly List<Inquiry> _bookings = new List<Inquiry>();
 
-        private Label lblTitle;
-        private Label lblSubtitle;
-        private DataGridView dgvBookings;
-        private Button btnViewDetails;
-        private Button btnCancelBooking;
+        public BookingListPanel()
+        {
+            InitializeComponent();
+        }
 
         public BookingListPanel(MainForm mainForm)
         {
             _mainForm = mainForm;
-            BackColor = AppTheme.BgDark;
-            Padding = new Padding(40, 30, 40, 30);
-
-            BuildUi();
+            InitializeComponent();
             LoadBookings();
-        }
-
-        private void BuildUi()
-        {
-            lblTitle = new Label
-            {
-                AutoSize = false,
-                Font = AppTheme.FontH2,
-                ForeColor = AppTheme.TextPrimary,
-                Location = new Point(40, 30),
-                Size = new Size(340, 32),
-                Text = "My Bookings"
-            };
-
-            lblSubtitle = new Label
-            {
-                AutoSize = false,
-                Font = AppTheme.FontBody,
-                ForeColor = AppTheme.TextSecondary,
-                Location = new Point(40, 62),
-                Size = new Size(620, 25),
-                Text = "Track your reservation requests, duration, total amount, and booking status."
-            };
-
-            dgvBookings = new DataGridView
-            {
-                AllowUserToAddRows = false,
-                AllowUserToDeleteRows = false,
-                AllowUserToResizeRows = false,
-                Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right,
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                BackgroundColor = AppTheme.BgCard,
-                BorderStyle = BorderStyle.None,
-                ColumnHeadersHeight = 38,
-                Location = new Point(40, 105),
-                MultiSelect = false,
-                ReadOnly = true,
-                RowHeadersVisible = false,
-                RowTemplate = { Height = 36 },
-                SelectionMode = DataGridViewSelectionMode.FullRowSelect,
-                Size = new Size(820, 390)
-            };
-
-            dgvBookings.Columns.Add("colId", "ID");
-            dgvBookings.Columns["colId"].Visible = false;
-            dgvBookings.Columns.Add("colVehicle", "Vehicle");
-            dgvBookings.Columns.Add("colOwner", "Owner");
-            dgvBookings.Columns.Add("colDays", "Days");
-            dgvBookings.Columns.Add("colTotal", "Total Amount");
-            dgvBookings.Columns.Add("colStatus", "Booking Status");
-            dgvBookings.Columns.Add("colPayment", "Payment");
-            dgvBookings.Columns.Add("colDate", "Requested");
-            dgvBookings.CellDoubleClick += dgvBookings_CellDoubleClick;
-            dgvBookings.SelectionChanged += dgvBookings_SelectionChanged;
-
-            btnViewDetails = MakeActionButton("View Details", 40, 515, 125, AppTheme.BgInput, AppTheme.TextPrimary);
-            btnViewDetails.Click += btnViewDetails_Click;
-
-            btnCancelBooking = MakeActionButton("Cancel Booking", 175, 515, 145, AppTheme.BgInput, AppTheme.TextPrimary);
-            btnCancelBooking.Click += btnCancelBooking_Click;
-
-            Controls.Add(lblTitle);
-            Controls.Add(lblSubtitle);
-            Controls.Add(dgvBookings);
-            Controls.Add(btnViewDetails);
-            Controls.Add(btnCancelBooking);
-
-            Resize += (s, e) => LayoutControls();
-            LayoutControls();
-        }
-
-        private Button MakeActionButton(string text, int x, int y, int width, Color backColor, Color foreColor)
-        {
-            var button = new Button
-            {
-                Text = text,
-                Location = new Point(x, y),
-                Size = new Size(width, 36),
-                BackColor = backColor,
-                ForeColor = foreColor,
-                FlatStyle = FlatStyle.Flat,
-                Font = AppTheme.FontButton,
-                Cursor = Cursors.Hand,
-                Anchor = AnchorStyles.Left | AnchorStyles.Bottom,
-                UseVisualStyleBackColor = false
-            };
-            button.FlatAppearance.BorderColor = AppTheme.BorderColor;
-            button.FlatAppearance.BorderSize = 1;
-            return button;
-        }
-
-        private void LayoutControls()
-        {
-            int width = Math.Max(500, Width - 80);
-            int gridHeight = Math.Max(220, Height - 190);
-
-            dgvBookings.Size = new Size(width, gridHeight);
-            btnViewDetails.Location = new Point(40, Height - 65);
-            btnCancelBooking.Location = new Point(175, Height - 65);
         }
 
         private void LoadBookings()
@@ -154,7 +51,7 @@ namespace RentXpress.Forms
                         booking.VehicleName,
                         booking.OwnerName,
                         Math.Max(1, booking.NumberOfDays),
-                        $"${booking.TotalAmount:F2}",
+                        $"PHP {booking.TotalAmount:F2}",
                         GetBookingStatus(booking),
                         $"{NormalizePaymentMethod(booking.PaymentMethod)} ({NormalizePaymentStatus(booking.PaymentStatus)})",
                         booking.CreatedAt.ToString("MMM dd, yyyy h:mm tt")
@@ -227,9 +124,9 @@ namespace RentXpress.Forms
                 "Vehicle: " + booking.VehicleName + Environment.NewLine +
                 "Owner: " + booking.OwnerName + Environment.NewLine +
                 "Number of Days: " + Math.Max(1, booking.NumberOfDays) + Environment.NewLine +
-                "Owner Amount: $" + booking.OwnerAmount.ToString("F2") + Environment.NewLine +
-                "Platform Fee: $" + booking.PlatformFee.ToString("F2") + Environment.NewLine +
-                "Total Amount: $" + booking.TotalAmount.ToString("F2") + Environment.NewLine +
+                "Owner Amount: PHP " + booking.OwnerAmount.ToString("F2") + Environment.NewLine +
+                "Platform Fee: PHP " + booking.PlatformFee.ToString("F2") + Environment.NewLine +
+                "Total Amount: PHP " + booking.TotalAmount.ToString("F2") + Environment.NewLine +
                 "Booking Status: " + GetBookingStatus(booking) + Environment.NewLine +
                 "Payment: " + NormalizePaymentMethod(booking.PaymentMethod) + " (" + NormalizePaymentStatus(booking.PaymentStatus) + ")",
                 "Booking Details", MessageBoxButtons.OK, MessageBoxIcon.Information);

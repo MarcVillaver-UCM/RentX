@@ -127,8 +127,29 @@
     <Compile Include="Forms\VehicleListPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Forms\VehicleCardControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\VehicleCardControl.Designer.cs">
+      <DependentUpon>VehicleCardControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ChatBubbleControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ChatBubbleControl.Designer.cs">
+      <DependentUpon>ChatBubbleControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PaymentDialogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PaymentDialogForm.Designer.cs">
+      <DependentUpon>PaymentDialogForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\BookingListPanel.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\BookingListPanel.Designer.cs">
+      <DependentUpon>BookingListPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\VehicleDetailForm.cs">
       <SubType>Form</SubType>
@@ -189,6 +210,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\VehicleCardControl.resx">
+      <DependentUpon>VehicleCardControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\VehicleListPanel.resx">
       <DependentUpon>VehicleListPanel.cs</DependentUpon>

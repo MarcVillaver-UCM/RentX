@@ -30,13 +30,13 @@ namespace RentXpress.Forms
             lblName.Text = _vehicle.Name;
             lblType.Text = _vehicle.Type;
             lblPrice.Text = _vehicle.PriceDisplay;
-            lblRating.Text = $"â­ {_vehicle.Rating:F1} ({_vehicle.ReviewCount:N0} reviews)";
-            lblSeats.Text = $"ðŸ‘¥ {_vehicle.Seats} Seats";
-            lblFuel.Text = $"â›½ {_vehicle.FuelType}";
-            lblTrans.Text = $"âš™ {_vehicle.Transmission}";
-            lblStatus.Text = $"â— {_vehicle.Status}";
+            lblRating.Text = $" {_vehicle.Rating:F1} ({_vehicle.ReviewCount:N0} reviews)";
+            lblSeats.Text = $" {_vehicle.Seats} Seats";
+            lblFuel.Text = $" {_vehicle.FuelType}";
+            lblTrans.Text = $" {_vehicle.Transmission}";
+            lblStatus.Text = $" {_vehicle.Status}";
             lblStatus.ForeColor = _vehicle.Status == "available" ? AppTheme.Accent : AppTheme.DangerColor;
-            // NEW CODE
+            
             // Show the vehicle's current/base location so renters know where pickup starts.
             lblStatus.Text += string.IsNullOrWhiteSpace(_vehicle.CurrentLocation) ? "" : $" | Location: {_vehicle.CurrentLocation}";
             lblDescription.Text = string.IsNullOrEmpty(_vehicle.Description) ? "No description available." : _vehicle.Description;

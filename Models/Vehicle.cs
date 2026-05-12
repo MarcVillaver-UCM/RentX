@@ -35,8 +35,8 @@ namespace RentXpress.Models
         public byte[] ImageData { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        public string PriceDisplay => $"${PricePerDay:F0}/day";
-        public string RatingDisplay => $"â˜… {Rating:F1} ({ReviewCount / 1000.0:F1}k reviews)";
+        public string PriceDisplay => $"PHP {PricePerDay:F0}/day";
+        public string RatingDisplay => $" {Rating:F1} ({ReviewCount / 1000.0:F1}k reviews)";
     }
 }
 

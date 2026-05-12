@@ -72,10 +72,10 @@ namespace RentXpress.Forms
             CalculateBookingPrice(out decimal basePrice, out decimal surcharge, out decimal total);
             int numberOfDays = GetNumberOfDays();
             decimal pricePerDay = _vehicle?.PricePerDay ?? 0m;
-            lblBasePrice.Text = $"Rental: ${pricePerDay:F2} x {numberOfDays} day(s) = ${basePrice:F2}";
+            lblBasePrice.Text = $"Rental: PHP {pricePerDay:F2} x {numberOfDays} day(s) = PHP {basePrice:F2}";
             // MODIFIED CODE
-            lblSurcharge.Text = $"Platform fee: ${surcharge:F2}";
-            lblTotalPrice.Text = $"Total: ${total:F2}";
+            lblSurcharge.Text = $"Platform fee: PHP {surcharge:F2}";
+            lblTotalPrice.Text = $"Total: PHP {total:F2}";
         }
 
         // NEW CODE
@@ -152,8 +152,8 @@ namespace RentXpress.Forms
                 _inquiryService.Send(inq);
                 MessageBox.Show(
                     chkEmergency.Checked
-                        ? $"Urgent booking sent successfully!\nDays: {numberOfDays}\nTotal: ${total:F2}\nPayment: {inq.PaymentMethod} ({inq.PaymentStatus})"
-                        : $"Booking request sent successfully!\nDays: {numberOfDays}\nTotal: ${total:F2}\nPayment: {inq.PaymentMethod} ({inq.PaymentStatus})",
+                        ? $"Urgent booking sent successfully!\nDays: {numberOfDays}\nTotal: PHP {total:F2}\nPayment: {inq.PaymentMethod} ({inq.PaymentStatus})"
+                        : $"Booking request sent successfully!\nDays: {numberOfDays}\nTotal: PHP {total:F2}\nPayment: {inq.PaymentMethod} ({inq.PaymentStatus})",
                     "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
